@@ -5,16 +5,20 @@ import Settings from "./Settings";
 import CycleStatus from "./CycleStatus";
 import Time from "./Time";
 import TimeControls from "./TimeControls";
+import { useState } from "react";
 
 function App() {
+  const [runningStatus, setRunningStatus] = useState("settled"); //settled, running, paused
+  const [phase, setPhase] = useState("pomodoro"); //pomodoro, shortBreak, longBreak
+
   return (
     <main id="main">
       <Title />
-      <StatusBar />
+      <StatusBar phase={phase} />
       <Settings />
       <CycleStatus />
       <Time />
-      <TimeControls />
+      <TimeControls runningStatus={runningStatus} setRunningStatus={setRunningStatus} />
     </main>
   );
 }

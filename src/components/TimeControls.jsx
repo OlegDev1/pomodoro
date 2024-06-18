@@ -1,7 +1,7 @@
 import "./TimeControls.css";
 import Button from "./ui/buttons/Button";
 
-export default function TimeControls() {
+export default function TimeControls({ runningStatus, setRunningStatus }) {
   return (
     <div className="timeControls">
       <Button
@@ -21,6 +21,9 @@ export default function TimeControls() {
             />
           </svg>
         }
+        button="run"
+        runningStatus={runningStatus}
+        onClick={() => setRunningStatus("running")}
       />
       <Button
         type="timerControl"
@@ -39,6 +42,9 @@ export default function TimeControls() {
             />
           </svg>
         }
+        button="pause"
+        runningStatus={runningStatus}
+        onClick={() => setRunningStatus("paused")}
       />
     </div>
   );

@@ -12,6 +12,7 @@ const ButtonElement = styled("button", {
   color: "#e4b8fa",
   fontSize: "16px",
   fontWeight: "500",
+  cursor: "pointer",
 
   variants: {
     type: {
@@ -38,12 +39,22 @@ const ButtonElement = styled("button", {
         backgroundColor: "transparent",
       },
     },
+    active: {
+      true: {
+        backgroundImage: "none",
+        backgroundColor: "#FF005D",
+      },
+    },
   },
 });
 
-export default function Button({ icon, text, type }) {
+export default function Button({ icon, text, type, runningStatus, button, onClick }) {
+  const isActive =
+    (runningStatus == "running" && button == "run") ||
+    (runningStatus == "paused" && button == "pause");
+
   return (
-    <ButtonElement type={type}>
+    <ButtonElement type={type} active={isActive} onClick={onClick}>
       {icon}
       {type != "settings" || <span>{text}</span>}
     </ButtonElement>
