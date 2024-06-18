@@ -1,0 +1,5 @@
+.timeControls {
+  display: flex;
+  gap: 1.5rem;
+  align-self: center;
+}

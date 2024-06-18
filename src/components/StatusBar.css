@@ -1,0 +1,27 @@
+.statusBar {
+  display: flex;
+  align-items: stretch;
+  box-sizing: border-box;
+  width: 550px;
+  height: 80px;
+  padding: 0.8rem;
+  margin: 0;
+  gap: 0.8rem;
+  border-radius: 70px;
+  background-color: #2a063d;
+}
+.statusBar__status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 1;
+  list-style-type: none;
+  border-radius: 70px;
+  font-weight: 500;
+  font-size: 16px;
+  font-style: normal;
+}
+.statusBar__status.selected {
+  background-color: #ba0264cd;
+}
