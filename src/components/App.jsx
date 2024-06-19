@@ -9,15 +9,26 @@ import { useState } from "react";
 
 function App() {
   const [runningStatus, setRunningStatus] = useState("settled"); //settled, running, paused
-  const [phase, setPhase] = useState("pomodoro"); //pomodoro, shortBreak, longBreak
+  const [phases, setPhases] = useState([
+    //pomodoro, shortBreak, longBreak
+    { phase: "pomodoro", time: 8, currentCycle: 1, totalCycles: 2 },
+    { phase: "longBreak", time: 20, currentCycle: 1, totalCycles: 2 },
+    { phase: "pomodoro", time: 11, currentCycle: 2, totalCycles: 2 },
+    { phase: "shortBreak", time: 9, currentCycle: 2, totalCycles: 2 },
+  ]);
 
   return (
     <main id="main">
       <Title />
-      <StatusBar phase={phase} />
+      <StatusBar phase={phases[0].phase} />
       <Settings />
-      <CycleStatus />
-      <Time />
+      <CycleStatus cycleInfo={phases[0]} />
+      <Time
+        runningStatus={runningStatus}
+        setRunningStatus={setRunningStatus}
+        phases={phases}
+        setPhases={setPhases}
+      />
       <TimeControls runningStatus={runningStatus} setRunningStatus={setRunningStatus} />
     </main>
   );

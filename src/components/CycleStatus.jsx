@@ -1,10 +1,10 @@
 import "./CycleStatus.css";
 
-export default function CycleStatus() {
+export default function CycleStatus({ cycleInfo }) {
   return (
     <p className="cycleStatus">
-      Cycles left
-      <br /> lala
+      Pomodoro cycles left:
+      <br /> {cycleInfo.currentCycle} of {cycleInfo.totalCycles}
     </p>
   );
 }

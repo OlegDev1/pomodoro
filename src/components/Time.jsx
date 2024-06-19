@@ -1,5 +1,28 @@
+import { useEffect, useState } from "react";
 import "./Time.css";
 
-export default function Time() {
-  return <time className="timeDisplay">25:00</time>;
+export default function Time({ runningStatus, setRunningStatus, setPhases, phases }) {
+  const [timeLeft, setTimeLeft] = useState(phases[0].time);
+
+  useEffect(() => {
+    if (runningStatus != "running") return;
+
+    const intervalId = setInterval(() => setTimeLeft((time) => time - 1, 1000), 1000);
+    return () => clearInterval(intervalId);
+  }, [runningStatus]);
+
+  useEffect(() => {
+    if (timeLeft == 0) {
+      const localPhases = [...phases].slice(1);
+      setPhases(localPhases);
+      setRunningStatus("settled");
+      setTimeLeft(localPhases[0].time);
+    }
+  }, [timeLeft, setPhases, setRunningStatus, phases]);
+
+  return (
+    <time className="timeDisplay">
+      {Math.floor(timeLeft / 60)}:{timeLeft - Math.floor(timeLeft / 60) * 60}
+    </time>
+  );
 }
