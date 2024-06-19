@@ -48,13 +48,27 @@ const ButtonElement = styled("button", {
   },
 });
 
-export default function Button({ icon, text, type, runningStatus, button, onClick }) {
+export default function Button({
+  icon,
+  text,
+  type,
+  runningStatus,
+  button,
+  onClick,
+  onHover,
+  onUnHover,
+}) {
   const isActive =
     (runningStatus == "running" && button == "run") ||
     (runningStatus == "paused" && button == "pause");
 
   return (
-    <ButtonElement type={type} active={isActive} onClick={onClick}>
+    <ButtonElement
+      type={type}
+      active={isActive}
+      onClick={onClick}
+      onMouseEnter={onHover}
+      onMouseLeave={onUnHover}>
       {icon}
       {type != "settings" || <span>{text}</span>}
     </ButtonElement>

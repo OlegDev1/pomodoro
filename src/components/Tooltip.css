@@ -1,0 +1,17 @@
+.tooltip__information {
+  box-sizing: border-box;
+  background-color: #efd1fd;
+  color: #2e0444;
+  position: absolute;
+  top: 30%;
+  font-size: 13px;
+  width: 100%;
+  height: 130%;
+  padding: 1.5rem;
+  border-radius: 6px;
+  font-weight: 500;
+}
+.brmedium {
+  display: block;
+  margin-bottom: 0.5rem;
+}

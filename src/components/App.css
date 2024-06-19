@@ -1,8 +1,22 @@
 #main {
   display: grid;
   grid-template-rows: 1fr repeat(3, 90px) 150px 100px 2fr;
-  background-image: linear-gradient(to right, #2a063d 0%, #ad5389 100%);
+  background-image: linear-gradient(to right, rgba(42, 6, 61, 1), rgba(173, 83, 137, 1));
   justify-items: center;
   height: 100vh;
   width: 100vw;
+}
+#main.pomodoro {
+  background-image: linear-gradient(to right, rgba(42, 6, 61, 1), rgba(173, 83, 137, 1));
+}
+#main.shortBreak {
+  background-image: linear-gradient(to top, rgba(58, 28, 113, 1), rgba(189, 63, 50, 1));
+}
+#main.longBreak {
+  background-image: linear-gradient(
+    to right,
+    rgba(184, 68, 166, 1),
+    rgba(120, 75, 160, 1),
+    rgba(43, 134, 197, 1)
+  );
 }

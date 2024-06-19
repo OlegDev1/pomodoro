@@ -9,6 +9,7 @@
   gap: 0.8rem;
   border-radius: 70px;
   background-color: #2a063d;
+  box-shadow: 0 0 10px 1px #2a063d;
 }
 .statusBar__status {
   display: flex;
@@ -24,4 +25,6 @@
 }
 .statusBar__status.selected {
   background-color: #ba0264cd;
+  box-shadow: 0 0 10px 2px #ba0264cd;
+  transition: all 0.3s;
 }

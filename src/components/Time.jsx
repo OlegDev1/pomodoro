@@ -20,9 +20,13 @@ export default function Time({ runningStatus, setRunningStatus, setPhases, phase
     }
   }, [timeLeft, setPhases, setRunningStatus, phases]);
 
+  let minutes = Math.floor(timeLeft / 60);
+  let seconds = timeLeft - minutes * 60;
+
   return (
     <time className="timeDisplay">
-      {Math.floor(timeLeft / 60)}:{timeLeft - Math.floor(timeLeft / 60) * 60}
+      {String(minutes).length == 1 ? "0" + minutes : minutes}:
+      {String(seconds).length == 1 ? "0" + seconds : seconds}
     </time>
   );
 }
