@@ -11,18 +11,19 @@ function App() {
   const [runningStatus, setRunningStatus] = useState("settled"); //settled, running, paused
   const [phases, setPhases] = useState([
     //pomodoro, shortBreak, longBreak
-    { phase: "pomodoro", time: 3, currentCycle: 1, totalCycles: 2 },
-    { phase: "longBreak", time: 20, currentCycle: 1, totalCycles: 2 },
-    { phase: "pomodoro", time: 11, currentCycle: 2, totalCycles: 2 },
-    { phase: "shortBreak", time: 9, currentCycle: 2, totalCycles: 2 },
+    { phase: "pomodoro", time: 3, current: true },
+    { phase: "shortBreak", time: 5, current: false },
+    { phase: "pomodoro", time: 3, current: false },
+    { phase: "longBreak", time: 7, current: false },
   ]);
+  const currentPhase = phases.find((item) => item.current);
 
   return (
-    <main id="main" className={phases[0].phase}>
+    <main id="main" className={currentPhase.phase}>
       <Title />
-      <StatusBar phase={phases[0].phase} />
+      <StatusBar phase={currentPhase.phase} />
       <Settings />
-      <CycleStatus cycleInfo={phases[0]} />
+      <CycleStatus phases={phases} />
       <Time
         runningStatus={runningStatus}
         setRunningStatus={setRunningStatus}

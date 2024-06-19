@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Time.css";
+import _ from "lodash";
 
 export default function Time({ runningStatus, setRunningStatus, setPhases, phases }) {
   const [timeLeft, setTimeLeft] = useState(phases[0].time);
@@ -13,10 +14,15 @@ export default function Time({ runningStatus, setRunningStatus, setPhases, phase
 
   useEffect(() => {
     if (timeLeft == 0) {
-      const localPhases = [...phases].slice(1);
-      setPhases(localPhases);
+      let newPhases = _.cloneDeep(phases);
+      const currentIndex = newPhases.findIndex((item) => item.current);
+      newPhases[currentIndex].current = false;
+      const newIndex = (currentIndex + 1) % newPhases.length;
+      newPhases[newIndex].current = true;
+
+      setPhases(newPhases);
       setRunningStatus("settled");
-      setTimeLeft(localPhases[0].time);
+      setTimeLeft(newPhases[newIndex].time);
     }
   }, [timeLeft, setPhases, setRunningStatus, phases]);
 
