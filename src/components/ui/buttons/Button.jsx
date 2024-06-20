@@ -50,7 +50,7 @@ const ButtonElement = styled("button", {
 
 export default function Button({
   icon,
-  text,
+  children,
   type,
   runningStatus,
   button,
@@ -70,7 +70,7 @@ export default function Button({
       onMouseEnter={onHover}
       onMouseLeave={onUnHover}>
       {icon}
-      {type != "settings" || <span>{text}</span>}
+      {type != "settings" || <span>{children}</span>}
     </ButtonElement>
   );
 }

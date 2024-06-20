@@ -1,16 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./Time.css";
 import _ from "lodash";
 
-export default function Time({ runningStatus, setRunningStatus, setPhases, phases }) {
-  const [timeLeft, setTimeLeft] = useState(phases[0].time);
-
+export default function Time({
+  runningStatus,
+  setRunningStatus,
+  setPhases,
+  phases,
+  timeLeft,
+  setTimeLeft,
+}) {
   useEffect(() => {
     if (runningStatus != "running") return;
 
     const intervalId = setInterval(() => setTimeLeft((time) => time - 1, 1000), 1000);
     return () => clearInterval(intervalId);
-  }, [runningStatus]);
+  }, [runningStatus, setTimeLeft]);
 
   useEffect(() => {
     if (timeLeft == 0) {
@@ -19,15 +24,14 @@ export default function Time({ runningStatus, setRunningStatus, setPhases, phase
       newPhases[currentIndex].current = false;
       const newIndex = (currentIndex + 1) % newPhases.length;
       newPhases[newIndex].current = true;
-
       setPhases(newPhases);
       setRunningStatus("settled");
       setTimeLeft(newPhases[newIndex].time);
     }
-  }, [timeLeft, setPhases, setRunningStatus, phases]);
+  }, [timeLeft, setPhases, setRunningStatus, phases, setTimeLeft]);
 
-  let minutes = Math.floor(timeLeft / 60);
-  let seconds = timeLeft - minutes * 60;
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft - minutes * 60;
 
   return (
     <time className="timeDisplay">

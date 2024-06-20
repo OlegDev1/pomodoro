@@ -1,11 +1,14 @@
+import { useState } from "react";
 import "./Settings.css";
 import Button from "./ui/buttons/Button";
+import SettingsMenu from "./SettingsMenu";
 
-export default function Settings() {
+export default function Settings({ phases, setPhases, setTimeLeft }) {
+  const [settingsIsOpened, setSettingsIsOpened] = useState(false);
+
   return (
     <div className="settings">
       <Button
-        text="Settings"
         icon={
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -16,7 +19,17 @@ export default function Settings() {
           </svg>
         }
         type="settings"
-      />
+        onClick={() => setSettingsIsOpened(true)}>
+        Settings
+      </Button>
+      {settingsIsOpened && (
+        <SettingsMenu
+          phases={phases}
+          setSettingsIsOpened={setSettingsIsOpened}
+          setPhases={setPhases}
+          setTimeLeft={setTimeLeft}
+        />
+      )}
     </div>
   );
 }
