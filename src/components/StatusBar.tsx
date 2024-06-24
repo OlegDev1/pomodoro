@@ -1,6 +1,6 @@
 import "./StatusBar.css";
 
-export default function StatusBar({ phase }) {
+export default function StatusBar({ phase }: { phase: "pomodoro" | "shortBreak" | "longBreak" }) {
   return (
     <ul className="statusBar">
       <li className={`statusBar__status 1 ${phase == "pomodoro" && "selected"}`}>Pomodoro</li>

@@ -35,7 +35,13 @@ const ButtonElement = styled("button", {
   },
 });
 
-export default function ButtonSettings({ children, onClick, type }) {
+interface ButtonSettingsProps {
+  children?: JSX.Element | string;
+  onClick?: () => void;
+  type?: "save" | "cancel" | "close";
+}
+
+export default function ButtonSettings({ children, onClick, type }: ButtonSettingsProps) {
   return (
     <ButtonElement type={type} onClick={onClick}>
       {children}

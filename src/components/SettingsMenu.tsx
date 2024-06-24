@@ -1,11 +1,30 @@
 import "./SettingsMenu.css";
 import ButtonSettings from "./ui/buttons/ButtonSettings";
 import { useState } from "react";
+import { Phase } from "../interfaces/phase.interface";
 
-export default function SettingsMenu({ phases, setPhases, setSettingsIsOpened, setTimeLeft }) {
-  const pomodoroTime = Math.floor(phases.find((item) => item.phase == "pomodoro").time / 60);
-  const shortBreakTime = Math.floor(phases.find((item) => item.phase == "shortBreak").time / 60);
-  const longBreakTime = Math.floor(phases.find((item) => item.phase == "longBreak").time / 60);
+interface SettingsMenuProps {
+  phases: Phase[];
+  setPhases: React.Dispatch<React.SetStateAction<Phase[]>>;
+  setSettingsIsOpened: React.Dispatch<React.SetStateAction<boolean>>;
+  setTimeLeft: React.Dispatch<React.SetStateAction<number>>;
+}
+
+export default function SettingsMenu({
+  phases,
+  setPhases,
+  setSettingsIsOpened,
+  setTimeLeft,
+}: SettingsMenuProps) {
+  const pomodoroTime = Math.floor(
+    (phases.find((item) => item.phase == "pomodoro")?.time ?? 1500) / 60 || 1500
+  );
+  const shortBreakTime = Math.floor(
+    (phases.find((item) => item.phase == "shortBreak")?.time ?? 300) / 60
+  );
+  const longBreakTime = Math.floor(
+    (phases.find((item) => item.phase == "longBreak")?.time ?? 1200) / 60
+  );
   const longBreakInterval = phases.length / 2;
   const [settingsData, setSettingsData] = useState({
     pomodoroTime,
@@ -15,7 +34,7 @@ export default function SettingsMenu({ phases, setPhases, setSettingsIsOpened, s
   });
 
   function handleSave() {
-    let newPhases = [];
+    const newPhases: Phase[] = [];
     for (let i = 0; i < settingsData.longBreakInterval - 1; i++) {
       newPhases.push({
         phase: "pomodoro",

@@ -48,20 +48,25 @@ const ButtonElement = styled("button", {
   },
 });
 
+interface ButtonProps {
+  icon?: JSX.Element;
+  children?: JSX.Element | string;
+  type?: "settings" | "timerControl" | "info";
+  onClick?: () => void;
+  onHover?: () => void;
+  onUnHover?: () => void;
+  isActive?: boolean;
+}
+
 export default function Button({
   icon,
   children,
   type,
-  runningStatus,
-  button,
   onClick,
   onHover,
   onUnHover,
-}) {
-  const isActive =
-    (runningStatus == "running" && button == "run") ||
-    (runningStatus == "paused" && button == "pause");
-
+  isActive,
+}: ButtonProps) {
   return (
     <ButtonElement
       type={type}

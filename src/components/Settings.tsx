@@ -2,8 +2,15 @@ import { useState } from "react";
 import "./Settings.css";
 import Button from "./ui/buttons/Button";
 import SettingsMenu from "./SettingsMenu";
+import { Phase } from "../interfaces/phase.interface";
 
-export default function Settings({ phases, setPhases, setTimeLeft }) {
+interface SettingsProps {
+  phases: Phase[];
+  setPhases: React.Dispatch<React.SetStateAction<Phase[]>>;
+  setTimeLeft: React.Dispatch<React.SetStateAction<number>>;
+}
+
+export default function Settings({ phases, setPhases, setTimeLeft }: SettingsProps) {
   const [settingsIsOpened, setSettingsIsOpened] = useState(false);
 
   return (

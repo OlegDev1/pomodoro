@@ -1,7 +1,13 @@
 import "./TimeControls.css";
 import Button from "./ui/buttons/Button";
+import { RunningStatus } from "../interfaces/runningStatus.interface";
 
-export default function TimeControls({ runningStatus, setRunningStatus }) {
+interface TimeControlsProps {
+  runningStatus: RunningStatus;
+  setRunningStatus: React.Dispatch<React.SetStateAction<RunningStatus>>;
+}
+
+export default function TimeControls({ runningStatus, setRunningStatus }: TimeControlsProps) {
   return (
     <div className="timeControls">
       <Button
@@ -21,9 +27,8 @@ export default function TimeControls({ runningStatus, setRunningStatus }) {
             />
           </svg>
         }
-        button="run"
-        runningStatus={runningStatus}
         onClick={() => setRunningStatus("running")}
+        isActive={runningStatus === "running"}
       />
       <Button
         type="timerControl"
@@ -42,9 +47,8 @@ export default function TimeControls({ runningStatus, setRunningStatus }) {
             />
           </svg>
         }
-        button="pause"
-        runningStatus={runningStatus}
         onClick={() => setRunningStatus("paused")}
+        isActive={runningStatus === "paused"}
       />
     </div>
   );

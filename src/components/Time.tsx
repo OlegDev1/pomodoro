@@ -1,6 +1,17 @@
 import { useEffect } from "react";
 import "./Time.css";
 import _ from "lodash";
+import { Phase } from "../interfaces/phase.interface";
+import { RunningStatus } from "../interfaces/runningStatus.interface";
+
+interface TypeProps {
+  runningStatus: RunningStatus;
+  setRunningStatus: React.Dispatch<React.SetStateAction<RunningStatus>>;
+  setPhases: React.Dispatch<React.SetStateAction<Phase[]>>;
+  phases: Phase[];
+  timeLeft: number;
+  setTimeLeft: React.Dispatch<React.SetStateAction<number>>;
+}
 
 export default function Time({
   runningStatus,
@@ -9,17 +20,17 @@ export default function Time({
   phases,
   timeLeft,
   setTimeLeft,
-}) {
+}: TypeProps) {
   useEffect(() => {
     if (runningStatus != "running") return;
 
-    const intervalId = setInterval(() => setTimeLeft((time) => time - 1, 1000), 1000);
+    const intervalId = setInterval(() => setTimeLeft((time) => time - 1), 1000);
     return () => clearInterval(intervalId);
   }, [runningStatus, setTimeLeft]);
 
   useEffect(() => {
     if (timeLeft == 0) {
-      let newPhases = _.cloneDeep(phases);
+      const newPhases: Phase[] = _.cloneDeep(phases);
       const currentIndex = newPhases.findIndex((item) => item.current);
       newPhases[currentIndex].current = false;
       const newIndex = (currentIndex + 1) % newPhases.length;
