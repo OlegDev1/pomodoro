@@ -6,7 +6,7 @@ export default function Title() {
     <header className="title">
       <Tooltip />
       <h1 className="title__main">Pomodoro</h1>
-      <h4 className="title__secondary">Make the best out of your time!</h4>
+      <h4 className="title__secondary">Optimize your time!</h4>
     </header>
   );
 }
